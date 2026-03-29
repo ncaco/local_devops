@@ -1,75 +1,45 @@
-# Frontend Architecture
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-This package is the Next.js frontend for the SNS automation deployment service.
+## Getting Started
 
-It is being reorganized into an FSD-style structure, with `app` used only for routing and composition, and feature/domain code moved into layered modules.
-
-## Structure
-
-- `src/app`: route groups, layouts, and page entrypoints
-- `src/views`: page-level compositions adapted from the FSD page layer name
-- `src/widgets`: large UI blocks assembled from features and entities
-- `src/features`: user actions and workflows
-- `src/entities`: domain models and their UI/state
-- `src/shared`: design tokens, utilities, API client, and shared UI
-
-## Route Groups
-
-The frontend is being expanded into these areas:
-
-- `/(marketing)`: landing page and public product marketing
-- `/(auth)`: login, signup, and invite acceptance
-- `/(workspace)`: main app shell, overview, approvals, failures, composer, and `my`
-- `/(org-admin)`: organization admin area for brands, channels, members, policies, and audit logs
-- `/(platform-admin)`: super-admin area for tenants, system health, incidents, and billing
-
-## Pages
-
-- Landing
-- Login
-- Signup
-- Invite acceptance
-- My page
-- Admin page
-- Super-admin page
-- Workspace pages for overview, approvals, failures, and content composition
-
-## Design Direction
-
-The UI follows the `Quiet Control Room` direction from `DESIGN.md`.
-
-- Public pages should sell the product and reduce friction
-- Auth pages should be short, trustworthy, and focused
-- Workspace pages should keep operational density
-- Admin and super-admin pages should make hierarchy and system state obvious
-
-## Local Development
+First, run the development server:
 
 ```bash
-npm install
 npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-Open `http://localhost:13000`.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-If you need to override the backend URL, copy `.env.example` to `.env.local`.
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-```powershell
-Copy-Item .env.example .env.local
-```
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-Demo auth accounts:
+## Learn More
 
-- `admin@example.com`
-- `operator@example.com`
-- `approver@example.com`
-- `viewer@example.com`
-- `superadmin@example.com`
+To learn more about Next.js, take a look at the following resources:
 
-Any non-empty password works in local demo mode.
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-## Notes
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-- Keep route-specific code in `src/app`
-- Keep reusable app logic out of `src/app`
-- Avoid reintroducing the old `components/` bucket for new code
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Admin API Boundary
+
+- Pages under `app/admin/**` must use admin API modules only:
+  - `@/src/shared/api/admin-users`
+  - `@/src/shared/api/admin-projects`
+  - `@/src/shared/api/admin-organizations`
+- Do not import `@/src/shared/api` barrel or non-admin modules (`organizations`, `users`) from admin pages.
+- Frontend admin routes under `app/api/admin/**` must proxy to backend `/api/v1/admin/**` endpoints.

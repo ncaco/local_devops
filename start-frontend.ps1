@@ -12,11 +12,23 @@ if (-not (Test-Path $frontendPath)) {
 
 Push-Location $frontendPath
 try {
-    $existingListener = Get-NetTCPConnection -LocalPort 13000 -State Listen -ErrorAction SilentlyContinue |
+    $frontendPort = 13000
+
+    if (Test-Path $envPath) {
+        $portLine = Get-Content $envPath | Where-Object { $_ -match '^PORT=' } | Select-Object -First 1
+        if ($portLine) {
+            $parsedPort = ($portLine -replace '^PORT=', '').Trim()
+            if ($parsedPort -match '^\d+$') {
+                $frontendPort = [int]$parsedPort
+            }
+        }
+    }
+
+    $existingListener = Get-NetTCPConnection -LocalPort $frontendPort -State Listen -ErrorAction SilentlyContinue |
         Select-Object -First 1
 
     if ($existingListener) {
-        Write-Host "13000 포트를 사용 중인 프로세스(PID $($existingListener.OwningProcess))를 종료합니다."
+        Write-Host "$frontendPort 포트를 사용 중인 프로세스(PID $($existingListener.OwningProcess))를 종료합니다."
         Stop-Process -Id $existingListener.OwningProcess -Force
         Start-Sleep -Seconds 1
     }
@@ -31,7 +43,13 @@ try {
         npm install
     }
 
-    Write-Host "Frontend dev server를 13000 포트에서 실행합니다."
+    $lockPath = Join-Path $frontendPath ".next\\dev\\lock"
+    if (Test-Path $lockPath) {
+        Remove-Item -LiteralPath $lockPath -Force
+    }
+
+    $env:PORT = "$frontendPort"
+    Write-Host "Frontend dev server를 $frontendPort 포트에서 실행합니다."
     npm run dev
 }
 finally {

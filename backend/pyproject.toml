@@ -1,17 +1,26 @@
 [project]
-name = "sns-automation-backend"
+name = "rdd-web-backend"
 version = "0.1.0"
-description = "SNS automation deployment backend"
-requires-python = ">=3.13"
+description = "FastAPI backend for RDD_WEB_V1"
+requires-python = ">=3.11"
 dependencies = [
-  "alembic>=1.16.5",
-  "asyncpg>=0.30.0",
   "fastapi>=0.116.1",
-  "pydantic-settings>=2.10.1",
-  "psycopg[binary]>=3.2.10",
+  "uvicorn>=0.35.0",
   "sqlalchemy>=2.0.43",
-  "uvicorn[standard]>=0.35.0"
+  "psycopg[binary]>=3.2.9",
+  "alembic>=1.16.4",
+  "pydantic-settings>=2.10.1",
+  "passlib[argon2]>=1.7.4",
+  "python-multipart>=0.0.20",
+  "email-validator>=2.2.0",
+  "psycopg2-binary>=2.9.11",
 ]
 
-[tool.uv]
-package = false
+[dependency-groups]
+dev = [
+  "pytest>=8.3.4",
+  "httpx>=0.28.1"
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]

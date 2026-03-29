@@ -1,0 +1,34 @@
+import { NextResponse } from "next/server";
+import { getValidatedSession } from "@/src/shared/auth/getValidatedSession";
+
+const backendApiUrl = process.env.BACKEND_API_URL;
+
+export async function DELETE(request: Request, { params }: { params: Promise<{ userId: string }> }) {
+  if (!backendApiUrl) {
+    return NextResponse.json({ detail: "BACKEND_API_URL is not set" }, { status: 500 });
+  }
+
+  const session = await getValidatedSession();
+  const actorId = session?.user?.id;
+  const userRole = session?.user?.role?.toUpperCase();
+  if (!actorId) {
+    return NextResponse.json({ detail: "Unauthorized" }, { status: 401 });
+  }
+  if (userRole !== "ADMIN") {
+    return NextResponse.json({ detail: "Forbidden" }, { status: 403 });
+  }
+
+  const body = (await request.json().catch(() => ({}))) as { confirmation_email?: string };
+  const { userId } = await params;
+  const response = await fetch(`${backendApiUrl}/api/v1/admin/withdrawn-users/${userId}`, {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      actor_user_id: actorId,
+      confirmation_email: body.confirmation_email,
+    }),
+  });
+
+  const data = await response.json().catch(() => ({ detail: "Failed to delete withdrawn user" }));
+  return NextResponse.json(data, { status: response.status });
+}
