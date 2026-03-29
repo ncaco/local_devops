@@ -28,9 +28,8 @@ export default function DashboardShell({ children, userName, userEmail, userImag
     <div className="flex min-h-screen bg-[#f6f7f9] text-slate-900">
       <aside className="hidden w-72 shrink-0 border-r border-slate-200 bg-white lg:flex lg:flex-col">
         <div className="border-b border-slate-200 px-6 py-5">
-          <Link href="/" className="inline-flex items-center gap-3" aria-label="홈으로 이동">
+          <Link href="/" className="inline-flex items-center" aria-label="홈으로 이동">
             <Image src="/images/site-logo.svg" alt="SNSAUTO 로고" width={240} height={64} className="h-7 w-auto" />
-            <span className="text-sm font-semibold text-slate-700">SNSAUTO Console</span>
           </Link>
         </div>
 
@@ -89,9 +88,8 @@ export default function DashboardShell({ children, userName, userEmail, userImag
       <main className="min-w-0 flex-1">
         <header className="border-b border-slate-200 bg-white px-5 py-4 lg:hidden">
           <div className="flex items-center justify-between gap-3">
-            <Link href="/" className="inline-flex items-center gap-2" aria-label="홈으로 이동">
+            <Link href="/" className="inline-flex items-center" aria-label="홈으로 이동">
               <Image src="/images/site-logo.svg" alt="SNSAUTO 로고" width={240} height={64} className="h-6 w-auto" />
-              <span className="text-sm font-semibold text-slate-700">SNSAUTO Console</span>
             </Link>
             {isAdmin ? (
               <Link

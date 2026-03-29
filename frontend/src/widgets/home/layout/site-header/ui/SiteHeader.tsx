@@ -7,8 +7,6 @@ import { useEffect, useRef, useState } from "react";
 import { ProfileMenu } from "@/src/shared/ui";
 import { siteNavItems } from "@/src/shared/config/site-nav";
 
-const ctaLabel = "프로젝트 시작";
-
 export default function SiteHeader() {
   const { data: session, status } = useSession();
   const [isVisible, setIsVisible] = useState(true);
@@ -55,9 +53,8 @@ export default function SiteHeader() {
     >
       <div className="w-full px-4 sm:px-6 lg:px-10 2xl:px-14">
         <div className="flex h-16 items-center">
-          <Link href="/" className="flex items-center gap-2 py-4 text-slate-900">
+          <Link href="/" className="flex items-center py-4 text-slate-900">
             <Image src="/images/site-logo.svg" alt="SNSAUTO 로고" width={240} height={64} priority className="h-7 w-auto" />
-            <span className="text-xl font-semibold">SNSAUTO</span>
           </Link>
           <div className="ml-auto flex h-full items-center gap-3">
             <nav className="hidden h-full items-center gap-6 text-sm text-slate-700 md:flex">
@@ -88,10 +85,10 @@ export default function SiteHeader() {
                   로그인
                 </Link>
                 <Link
-                  href="/dashboard"
+                  href="/signup"
                   className="rounded-lg bg-[var(--primary)] px-4 py-1.5 text-xs font-medium text-white transition hover:opacity-90"
                 >
-                  {ctaLabel}
+                  회원가입
                 </Link>
               </>
             )}

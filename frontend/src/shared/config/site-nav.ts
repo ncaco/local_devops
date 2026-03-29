@@ -7,9 +7,4 @@ export type SiteNavItem = {
   }>;
 };
 
-export const siteNavItems: SiteNavItem[] = [
-  {
-    href: "/login",
-    label: "로그인",
-  },
-];
+export const siteNavItems: SiteNavItem[] = [];
