@@ -12,10 +12,18 @@ function requiredText(value: FormDataEntryValue | null) {
   return typeof value === "string" ? value.trim() : "";
 }
 
+function sanitizeNextPath(value: string, fallback: string) {
+  if (!value.startsWith("/") || value.startsWith("//")) {
+    return fallback;
+  }
+
+  return value;
+}
+
 export async function loginAction(formData: FormData) {
   const email = requiredText(formData.get("email"));
   const password = requiredText(formData.get("password"));
-  const next = requiredText(formData.get("next")) || "/overview";
+  const next = sanitizeNextPath(requiredText(formData.get("next")) || "/overview", "/overview");
 
   if (!email || !password) {
     redirect(`/login?error=${encodeURIComponent("이메일과 비밀번호를 입력하세요.")}`);

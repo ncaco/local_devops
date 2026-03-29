@@ -12,6 +12,15 @@ if (-not (Test-Path $frontendPath)) {
 
 Push-Location $frontendPath
 try {
+    $existingListener = Get-NetTCPConnection -LocalPort 13000 -State Listen -ErrorAction SilentlyContinue |
+        Select-Object -First 1
+
+    if ($existingListener) {
+        Write-Host "13000 포트를 사용 중인 프로세스(PID $($existingListener.OwningProcess))를 종료합니다."
+        Stop-Process -Id $existingListener.OwningProcess -Force
+        Start-Sleep -Seconds 1
+    }
+
     if ((-not (Test-Path $envPath)) -and (Test-Path $envExamplePath)) {
         Copy-Item $envExamplePath $envPath
         Write-Host "frontend/.env.local 이 없어 .env.example을 복사했습니다."

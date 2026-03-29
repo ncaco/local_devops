@@ -22,25 +22,21 @@ export function OverviewScreen({ overview, approvals, failures }: OverviewScreen
     <div className="page-grid has-side-panel">
       <section className="page-content">
         <div className="stack">
-          <section className="page-panel">
+          <section className="dashboard-hero">
             <div>
               <p className="hero-eyebrow">Live control room</p>
-              <h3>승인, 예약, 실패 복구가 한 흐름으로 보여야 운영이 빨라집니다.</h3>
+              <h3>오늘의 게시 흐름과 막힌 지점을 바로 읽는 운영 화면</h3>
             </div>
             <p className="body-copy">
-              이 화면은 마케팅 장식이 아니라 게시 실패를 줄이고 승인 병목을 없애는 운영
-              콘솔입니다.
+              상태, 원인, 다음 조치가 같은 문맥 안에 보여야 운영자가 덜 헤맵니다.
             </p>
           </section>
 
-          <section className="metric-grid">
+          <section className="metric-grid dashboard-metric-grid">
             {overviewMetrics.map((metric) => (
-              <article className="metric-card" key={metric.label}>
+              <article className="metric-card dashboard-metric-card" key={metric.label}>
                 <div className="section-heading">
-                  <div>
-                    <p className="section-label">{metric.label}</p>
-                    <h3>{metric.label}</h3>
-                  </div>
+                  <p className="section-label">{metric.label}</p>
                   <StatusChip tone={metric.tone}>{metric.tone}</StatusChip>
                 </div>
                 <strong className="metric-value">{metric.value}</strong>
@@ -49,17 +45,17 @@ export function OverviewScreen({ overview, approvals, failures }: OverviewScreen
             ))}
           </section>
 
-          <section className="page-panel">
+          <section className="dashboard-table">
             <div className="section-heading">
               <div>
-                <p className="section-label">Operational timeline</p>
-                <h3>최근 이벤트</h3>
+                <p className="section-label">Recent events</p>
+                <h3>운영 타임라인</h3>
               </div>
             </div>
 
             <div className="timeline">
               {timeline.map((entry) => (
-                <div className="timeline-row" key={`${entry.time}-${entry.title}`}>
+                <div className="timeline-row dashboard-timeline-row" key={`${entry.time}-${entry.title}`}>
                   <span className="mono-time">{entry.time}</span>
                   <div className={`timeline-marker timeline-${entry.tone}`} />
                   <div className="timeline-body">
@@ -75,18 +71,18 @@ export function OverviewScreen({ overview, approvals, failures }: OverviewScreen
 
       <aside className="side-panel">
         <div className="stack">
-          <div className="panel-card">
+          <div className="panel-card dashboard-side-card">
             <p className="section-label">Shift note</p>
             <p className="body-copy">
               점심 직전 게시량이 몰립니다. Brand C 토큰 만료를 먼저 복구하지 않으면 오후
               예약이 연쇄 지연됩니다.
             </p>
           </div>
-          <div className="panel-card">
+          <div className="panel-card dashboard-side-card">
             <p className="section-label">Queue snapshot</p>
             <div className="stack-sm">
               {queue.map((item) => (
-                <div className="queue-row" key={`${item.title}-${item.window}`}>
+                <div className="queue-row dashboard-queue-row" key={`${item.title}-${item.window}`}>
                   <div>
                     <strong>{item.title}</strong>
                     <p>{item.window}</p>

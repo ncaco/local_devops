@@ -13,15 +13,15 @@ export default async function SignupPage({
 
   return (
     <AuthPage
-      kicker="Start organization"
-      title="새 조직을 열고 승인 기반 운영을 시작합니다."
-      description="일반 회원가입은 새 조직 생성으로 이어집니다. 초대를 받은 사용자는 별도 링크로 기존 조직에 합류합니다."
-      asideTitle="Hybrid signup"
-      asideBody="외부 유입은 바로 시작하고, 기존 조직 초대는 끊김 없이 수락해야 합니다."
+      kicker="바로 시작하기"
+      title="가게 SNS 운영을 한곳에서 정리해보세요."
+      description="회원가입 후 바로 예약 발행 흐름을 만들고, 채널 상태와 실패 알림을 한 화면에서 관리할 수 있습니다."
+      asideTitle="작은 팀용 SNS 운영"
+      asideBody="사장님과 직원이 같이 써도 복잡하지 않고, 오늘 해야 할 게시물부터 보이게 설계합니다."
       bullets={[
-        "회원가입 후 기본 역할은 조직 관리자",
-        "조직 이름을 입력하면 첫 브랜드 운영 공간 생성",
-        "초대 링크는 별도 화면에서 approver 흐름으로 수락",
+        "가게나 브랜드 이름으로 바로 워크스페이스 생성",
+        "예약 발행과 채널 상태를 기본 화면에서 확인",
+        "필요하면 데모 로그인으로 먼저 화면 체험 가능",
       ]}
       notice={error ? <div className="auth-error">{error}</div> : null}
       footer={
@@ -34,7 +34,7 @@ export default async function SignupPage({
         <div className="field-grid">
           <label className="field">
             <span className="field-label">Name</span>
-            <input name="name" placeholder="홍길동" />
+            <input autoComplete="name" name="name" placeholder="홍길동" required />
           </label>
           <label className="field">
             <span className="field-label">Organization</span>
@@ -42,19 +42,19 @@ export default async function SignupPage({
           </label>
           <label className="field">
             <span className="field-label">Email</span>
-            <input name="email" placeholder="you@company.com" />
+            <input autoComplete="email" name="email" placeholder="you@company.com" required type="email" />
           </label>
           <label className="field">
             <span className="field-label">Password</span>
-            <input name="password" placeholder="••••••••" type="password" />
+            <input autoComplete="new-password" name="password" placeholder="••••••••" required type="password" />
           </label>
         </div>
         <div className="button-row">
           <button className="primary-button" type="submit">
-            회원가입
+            시작하기
           </button>
-          <Link className="ghost-button" href="/invite/demo-approver">
-            초대 링크 보기
+          <Link className="ghost-button" href="/login">
+            데모 로그인
           </Link>
         </div>
       </form>

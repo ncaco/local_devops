@@ -14,6 +14,16 @@ export function FailuresScreen({ failures }: { failures: FailureItem[] }) {
             <p className="body-copy">빨간 알람이 아니라 운영자의 복구 작업대처럼 보여야 합니다.</p>
           </section>
 
+          {failures.length === 0 ? (
+            <section className="page-panel">
+              <p className="section-label">Recovery queue</p>
+              <h3>지금은 복구가 필요한 실패 작업이 없습니다.</h3>
+              <p className="body-copy">
+                채널 상태 이상이나 게시 실패가 생기면 이 화면에서 원인과 다음 조치를 함께 보여줍니다.
+              </p>
+            </section>
+          ) : null}
+
           {failures.map((item) => (
             <article className="failure-card" key={item.publish_job_id}>
               <div className="section-heading">
@@ -27,13 +37,17 @@ export function FailuresScreen({ failures }: { failures: FailureItem[] }) {
                 <span>{item.channel}</span>
                 <span>{item.publish_job_id}</span>
               </div>
-              <div className="button-row">
-                <button className="primary-button" type="button">
-                  {item.next_action}
-                </button>
-                <button className="ghost-button" type="button">
-                  View log
-                </button>
+              <div className="stack-sm">
+                <p className="section-label">Next step</p>
+                <p className="body-copy">
+                  {item.next_action}. 세부 조치 로그는 작업 ID {item.publish_job_id} 기준으로 백엔드 복구 콘솔에서 확인합니다.
+                </p>
+                <div className="inline-badges">
+                  <StatusChip tone={item.retryable ? "warning" : "danger"}>
+                    {item.retryable ? "자동 재시도 후보" : "수동 복구 필요"}
+                  </StatusChip>
+                  <StatusChip tone="info">{item.publish_job_id}</StatusChip>
+                </div>
               </div>
             </article>
           ))}

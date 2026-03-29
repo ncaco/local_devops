@@ -29,20 +29,20 @@ export function AuthPage({
         <aside className="auth-aside">
           <div className="auth-brand">
             <span className="brand-chip">NC97 OPS</span>
-            <strong>SNS Deployment System</strong>
+            <strong>NC97 Social Ops</strong>
           </div>
           <div className="stack">
             <div>
               <p className="auth-kicker">{asideTitle}</p>
               <p className="marketing-proof-quote">{asideBody}</p>
             </div>
-            <ul className="plain-list">
+            <ul className="auth-bullet-list">
               {bullets.map((bullet) => (
                 <li key={bullet}>{bullet}</li>
               ))}
             </ul>
             <p className="auth-helper">
-              운영 도구는 화려함보다 신뢰가 먼저입니다. 로그인 화면도 그 원칙을 따릅니다.
+              가게 SNS 운영은 화려한 기능보다 오늘 올릴 게시물을 놓치지 않는 게 먼저입니다.
             </p>
           </div>
         </aside>
@@ -58,7 +58,7 @@ export function AuthPage({
           {children}
 
           <div className="auth-inline-note">
-            <Link href="/">Back to landing</Link>
+            <Link href="/">랜딩으로 돌아가기</Link>
             {footer}
           </div>
         </section>

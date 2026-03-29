@@ -28,6 +28,8 @@ export function ConsoleShell({
   const pathname = usePathname();
   const current = pageMeta[pathname] ?? { eyebrow: "Workspace", title: "SNS Deployment System" };
   const primaryMembership = user.organizationMemberships[0];
+  const currentRole = user.platformRole ?? primaryMembership?.role ?? "member";
+  const currentOrg = primaryMembership?.organizationName ?? "No organization selected";
 
   return (
     <div className="app-frame">
@@ -42,20 +44,16 @@ export function ConsoleShell({
           </div>
         </div>
 
+        <div className="sidebar-card sidebar-identity">
+          <p className="sidebar-label">Workspace</p>
+          <strong>{currentOrg}</strong>
+          <p className="sidebar-meta">{currentRole}</p>
+        </div>
+
         <div className="sidebar-card">
           <p className="sidebar-label">Signed in</p>
           <strong>{user.name}</strong>
           <p className="sidebar-meta">{user.email}</p>
-          <div className="inline-badges">
-            <span className="status-pill status-pill-info">
-              {user.platformRole ?? primaryMembership?.role ?? "member"}
-            </span>
-            {primaryMembership ? (
-              <span className="status-pill status-pill-neutral">
-                {primaryMembership.organizationName}
-              </span>
-            ) : null}
-          </div>
         </div>
 
         <nav className="nav-list" aria-label="Primary">
@@ -79,8 +77,12 @@ export function ConsoleShell({
           <div>
             <p className="page-eyebrow">{current.eyebrow}</p>
             <h1 className="page-title">{current.title}</h1>
+            <p className="console-context">{currentOrg}</p>
           </div>
-          <div className="page-actions">{actions}</div>
+          <div className="page-actions">
+            <span className="status-pill status-pill-neutral">{currentRole}</span>
+            {actions}
+          </div>
         </header>
 
         {children}

@@ -1,4 +1,7 @@
-import { requireAuthenticatedUser } from "@/entities/session/lib/server-session";
+import {
+  hasOrganizationRole,
+  requireAuthenticatedUser,
+} from "@/entities/session/lib/server-session";
 import { LogoutButton } from "@/features/auth/ui/logout-button";
 import { workspaceNav, workspacePageMeta } from "@/shared/config/navigation";
 import { ConsoleShell } from "@/widgets/console-shell/ui/console-shell";
@@ -9,14 +12,17 @@ export default async function WorkspaceLayout({
   children: React.ReactNode;
 }>) {
   const user = await requireAuthenticatedUser("/overview");
+  const canAccessAdmin = hasOrganizationRole(user, ["admin"]);
 
   return (
     <ConsoleShell
       actions={
         <>
-          <a className="ghost-button" href="/admin">
-            Admin
-          </a>
+          {canAccessAdmin ? (
+            <a className="ghost-button" href="/admin">
+              Admin
+            </a>
+          ) : null}
           {user.platformRole === "super_admin" ? (
             <a className="ghost-button" href="/super-admin">
               Super Admin

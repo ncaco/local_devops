@@ -34,11 +34,13 @@ export type FailureItem = {
 };
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:18000";
+const API_TIMEOUT_MS = 3000;
 
 async function apiGet<T>(path: string): Promise<T | null> {
   try {
     const response = await fetch(`${API_BASE_URL}${path}`, {
       cache: "no-store",
+      signal: AbortSignal.timeout(API_TIMEOUT_MS),
       headers: {
         "x-request-id": `frontend_${Date.now()}`,
       },
