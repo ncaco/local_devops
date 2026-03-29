@@ -1,0 +1,15 @@
+<svg width="240" height="64" viewBox="0 0 240 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="c3-accent" x1="12" y1="14" x2="50" y2="50" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FB923C"/>
+      <stop offset="1" stop-color="#F97316"/>
+    </linearGradient>
+  </defs>
+  <rect x="8" y="8" width="48" height="48" rx="16" fill="#FFFFFF"/>
+  <rect x="8.5" y="8.5" width="47" height="47" rx="15.5" stroke="#E2E8F0"/>
+  <path d="M20 21H32.5C39 21 43.5 24.8 43.5 30.2C43.5 35.8 39.1 39.5 32.5 39.5H25.5V43H45" stroke="#0F172A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M18 43H28" stroke="url(#c3-accent)" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="45" cy="43" r="4" fill="url(#c3-accent)"/>
+  <text x="72" y="29" fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="21" font-weight="700" letter-spacing="0.5">SNSAUTO</text>
+  <text x="72" y="45" fill="#64748B" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="600" letter-spacing="1.8">AUTOMATE THE SOCIAL LAYER</text>
+</svg>

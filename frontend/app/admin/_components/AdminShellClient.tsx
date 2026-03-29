@@ -23,10 +23,10 @@ export default function AdminShellClient({ displayName, email, image, userRole, 
 
   return (
     <div className="flex h-screen flex-col overflow-hidden bg-[#f6f7f9] text-slate-900">
-      <header className="flex h-11 shrink-0 items-center justify-between border-b border-slate-200 bg-white px-3.5">
+      <header className="flex h-14 shrink-0 items-center justify-between border-b border-slate-200 bg-white px-3.5">
         <div className="flex items-center gap-2.5">
           <Link href="/" className="flex items-center" aria-label="홈으로 이동">
-            <Image src="/images/site-logo.svg" alt="SNSAUTO 로고" width={240} height={64} className="h-6 w-auto" />
+            <Image src="/images/site-logo.svg" alt="SNSAUTO 로고" width={240} height={64} className="h-8 w-auto" />
           </Link>
           <span className="hidden h-5 w-px bg-slate-200 sm:block" />
           <p className="hidden items-center gap-1.5 text-sm font-semibold text-slate-700 sm:flex">

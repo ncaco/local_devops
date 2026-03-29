@@ -47,14 +47,14 @@ export default function SiteHeader() {
 
   return (
     <header
-      className={`sticky top-0 z-40 h-16 border-b border-slate-200/70 bg-white/90 backdrop-blur-md transition-transform duration-300 ease-out ${
+      className={`sticky top-0 z-40 h-[72px] border-b border-slate-200/70 bg-white/90 backdrop-blur-md transition-transform duration-300 ease-out ${
         isVisible ? "translate-y-0" : "-translate-y-full"
       }`}
     >
       <div className="w-full px-4 sm:px-6 lg:px-10 2xl:px-14">
-        <div className="flex h-16 items-center">
+        <div className="flex h-[72px] items-center">
           <Link href="/" className="flex items-center py-4 text-slate-900">
-            <Image src="/images/site-logo.svg" alt="SNSAUTO 로고" width={240} height={64} priority className="h-7 w-auto" />
+            <Image src="/images/site-logo.svg" alt="SNSAUTO 로고" width={240} height={64} priority className="h-9 w-auto" />
           </Link>
           <div className="ml-auto flex h-full items-center gap-3">
             <nav className="hidden h-full items-center gap-6 text-sm text-slate-700 md:flex">

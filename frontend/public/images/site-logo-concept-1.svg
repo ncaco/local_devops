@@ -1,0 +1,17 @@
+<svg width="240" height="64" viewBox="0 0 240 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="c1-accent" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FB923C"/>
+      <stop offset="1" stop-color="#F97316"/>
+    </linearGradient>
+  </defs>
+  <rect x="8" y="8" width="48" height="48" rx="15" fill="#FFF7ED"/>
+  <rect x="8.5" y="8.5" width="47" height="47" rx="14.5" stroke="#FED7AA"/>
+  <circle cx="22" cy="42" r="4" fill="#0F172A"/>
+  <circle cx="32" cy="24" r="4" fill="url(#c1-accent)"/>
+  <circle cx="42" cy="34" r="4" fill="#0F172A"/>
+  <path d="M22 42L32 24L42 34" stroke="#0F172A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M18 18H46" stroke="#F97316" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
+  <text x="72" y="30" fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="21" font-weight="700" letter-spacing="0.5">SNSAUTO</text>
+  <text x="72" y="46" fill="#64748B" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="600" letter-spacing="2.4">SOCIAL AUTOMATION</text>
+</svg>

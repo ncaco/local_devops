@@ -6,7 +6,7 @@ export default function SignUpPage() {
   return (
     <div className="relative grid min-h-screen bg-[#f6f7f9] lg:grid-cols-10">
       <Link href="/" tabIndex={-1} className="absolute top-6 left-6 z-10 flex items-center text-slate-900">
-        <Image src="/images/site-logo.svg" alt="SNSAUTO 로고" width={240} height={64} priority className="h-7 w-auto" />
+        <Image src="/images/site-logo.svg" alt="SNSAUTO 로고" width={240} height={64} priority className="h-10 w-auto" />
       </Link>
       <section className="flex items-center justify-center bg-white px-8 py-10 lg:col-span-4 lg:px-16">
         <div className="w-full max-w-lg">

@@ -7,7 +7,7 @@ export default function ForgotPasswordPage() {
   return (
     <div className="relative flex min-h-screen items-center justify-center bg-[#f6f7f9] px-6 py-10">
       <Link href="/" tabIndex={-1} className="absolute top-6 left-6 z-10 flex items-center text-slate-900">
-        <Image src="/images/site-logo.svg" alt="SNSAUTO 로고" width={240} height={64} priority className="h-7 w-auto" />
+        <Image src="/images/site-logo.svg" alt="SNSAUTO 로고" width={240} height={64} priority className="h-10 w-auto" />
       </Link>
       <div className="w-full max-w-md rounded-xl bg-white p-8 shadow-sm">
         <h1 className="text-2xl font-semibold tracking-tight text-slate-900">Forgot password</h1>

@@ -1,11 +1,17 @@
 <svg width="240" height="64" viewBox="0 0 240 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="240" height="64" rx="18" fill="#0F172A"/>
-  <rect x="10" y="10" width="44" height="44" rx="12" fill="#F97316"/>
-  <path d="M24 24H40V28H28V31H39C42.3137 31 45 33.6863 45 37V37C45 40.3137 42.3137 43 39 43H23V39H39C40.1046 39 41 38.1046 41 37C41 35.8954 40.1046 35 39 35H29C25.6863 35 23 32.3137 23 29V29C23 25.6863 25.6863 23 29 23H24V24Z" fill="white"/>
-  <path d="M74 21H90.5C96.299 21 101 25.701 101 31.5C101 37.299 96.299 42 90.5 42H74V21ZM80 26V37H90.5C92.9853 37 95 34.9853 95 32.5V30.5C95 28.0147 92.9853 26 90.5 26H80Z" fill="white"/>
-  <path d="M106 42V21H112L124 34.5V21H130V42H124L112 28.5V42H106Z" fill="white"/>
-  <path d="M136 42V21H160V26H142V29.5H158V34H142V37H160V42H136Z" fill="white"/>
-  <path d="M165 21H171.5L177 35L182.5 21H189L180.5 42H173.5L165 21Z" fill="white"/>
-  <path d="M196.154 21H203.846L214 42H207.5L205.565 37.75H194.435L192.5 42H186L196.154 21ZM196.692 33.25H203.308L200 26L196.692 33.25Z" fill="white"/>
-  <path d="M214 21H236V26H228V42H222V26H214V21Z" fill="white"/>
+  <defs>
+    <linearGradient id="main-accent" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FB923C"/>
+      <stop offset="1" stop-color="#F97316"/>
+    </linearGradient>
+  </defs>
+  <rect x="8" y="8" width="48" height="48" rx="15" fill="#FFF7ED"/>
+  <rect x="8.5" y="8.5" width="47" height="47" rx="14.5" stroke="#FED7AA"/>
+  <circle cx="22" cy="42" r="4" fill="#0F172A"/>
+  <circle cx="32" cy="24" r="4" fill="url(#main-accent)"/>
+  <circle cx="42" cy="34" r="4" fill="#0F172A"/>
+  <path d="M22 42L32 24L42 34" stroke="#0F172A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M18 18H46" stroke="#F97316" stroke-width="3" stroke-linecap="round" opacity="0.82"/>
+  <text x="72" y="31" fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="21" font-weight="800" letter-spacing="0.4">SNSAUTO</text>
+  <text x="72" y="46" fill="#64748B" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="700" letter-spacing="2.1">SOCIAL AUTOMATION</text>
 </svg>

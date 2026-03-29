@@ -30,7 +30,7 @@ export default function SiteFooter() {
       <Container>
         <div className="grid gap-10 py-16 lg:grid-cols-[1.2fr_2.8fr]">
           <div className="space-y-6">
-            <Image src="/images/site-logo.svg" alt="SNSAUTO 로고" width={240} height={64} className="h-7 w-auto" />
+            <Image src="/images/site-logo.svg" alt="SNSAUTO 로고" width={240} height={64} className="h-8 w-auto" />
             <div className="flex gap-3 text-slate-500">
               {footerContent.socials.map((social) => {
                 const Icon = iconMap[social.label] ?? Globe;
