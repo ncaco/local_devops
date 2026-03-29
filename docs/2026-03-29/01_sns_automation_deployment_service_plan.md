@@ -129,7 +129,7 @@ SNS 자동화 배포 서비스는 여러 SNS 채널에 대해 콘텐츠 검수, 
   - dev: `23000`
   - prod: `33000`
 - Backend API
-  - local: `14000`
+  - local: `18000`
   - dev: `24000`
   - prod: `34000`
 - PostgreSQL
@@ -401,4 +401,3 @@ docs/
 5. `03_information_architecture.md`
 6. `07_deployment_operations.md`
 7. `08_test_strategy.md`
-

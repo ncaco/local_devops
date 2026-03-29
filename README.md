@@ -22,10 +22,24 @@
 3. `backend/` 실행
 4. `frontend/` 실행
 
+루트 PowerShell 스크립트로도 바로 실행할 수 있습니다.
+
+```powershell
+.\start-database.ps1
+.\start-backend.ps1
+.\start-frontend.ps1
+```
+
+PostgreSQL 비밀번호가 기존 Docker 볼륨과 맞지 않으면 아래 스크립트로 로컬 DB를 초기화할 수 있습니다.
+
+```powershell
+.\reset-database.ps1
+```
+
 ## 로컬 포트
 
 - Frontend: `13000`
-- Backend: `14000`
+- Backend: `18000`
 - PostgreSQL: `15432`
 
 ## 문서 인덱스

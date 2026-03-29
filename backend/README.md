@@ -5,7 +5,7 @@
 ```bash
 uv sync
 uv run alembic upgrade head
-uv run uvicorn app.main:app --reload --port 14000
+uv run uvicorn app.main:app --reload --port 18000
 ```
 
 마이그레이션은 `backend/`가 소유합니다. 로컬 PostgreSQL은 루트의 `database/` Docker Compose로 먼저 실행합니다.

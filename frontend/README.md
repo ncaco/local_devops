@@ -1,16 +1,28 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app) and adapted to the SNS deployment console mockup.
 
 ## Getting Started
 
 First, run the development server:
 
 ```bash
+npm install
 npm run dev
 ```
 
 Open [http://localhost:13000](http://localhost:13000) with your browser to see the result.
 
-You can start editing the page by modifying `src/app/page.tsx`. The page auto-updates as you edit the file.
+Copy `.env.example` to `.env.local` before running if you want to override the backend URL.
+
+```powershell
+Copy-Item .env.example .env.local
+```
+
+The mockup uses these routes:
+
+- `/`
+- `/composer`
+- `/approvals`
+- `/failures`
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 

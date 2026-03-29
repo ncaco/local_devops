@@ -1,65 +1,113 @@
-import Image from "next/image";
+import { AppShell } from "@/components/app-shell";
+import { getApprovals, getDashboardOverview, getFailures } from "@/components/api";
+import { buildTimelineFromApi, createOverviewMetrics, queue } from "@/components/mock-data";
+import { StatusChip } from "@/components/status-chip";
 
-export default function Home() {
+export const dynamic = "force-dynamic";
+
+export default async function Home() {
+  const [overview, approvals, failures] = await Promise.all([
+    getDashboardOverview(),
+    getApprovals(),
+    getFailures(),
+  ]);
+
+  const overviewMetrics = createOverviewMetrics(overview);
+  const timeline = buildTimelineFromApi(approvals, failures);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <AppShell
+      eyebrow="Operations Overview"
+      title="SNS Deployment Console"
+      sidePanel={
+        <div className="stack">
+          <div className="panel-card">
+            <p className="section-label">Shift note</p>
+            <p className="body-copy">
+              오늘은 점심 시간 직전 게시량이 몰립니다. Brand C 토큰 만료부터
+              복구하지 않으면 오후 예약이 연쇄 지연됩니다.
+            </p>
+          </div>
+          <div className="panel-card">
+            <p className="section-label">Queue snapshot</p>
+            <div className="stack-sm">
+              {queue.map((item) => (
+                <div className="queue-row" key={`${item.title}-${item.window}`}>
+                  <div>
+                    <strong>{item.title}</strong>
+                    <p>{item.window}</p>
+                  </div>
+                  <StatusChip
+                    tone={
+                      item.state === "BLOCKED"
+                        ? "danger"
+                        : item.state === "WAITING_APPROVAL"
+                          ? "warning"
+                          : "info"
+                    }
+                  >
+                    {item.state}
+                  </StatusChip>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      }
+    >
+      <div className="stack">
+        <section className="hero-card">
+          <div>
+            <p className="hero-eyebrow">Live control room</p>
+            <h2>승인, 예약, 실패 복구가 한 흐름으로 보여야 운영이 빨라집니다.</h2>
+          </div>
+          <p>
+            이 목업은 예쁜 마케팅 대시보드가 아니라, 게시 실패를 줄이고 승인
+            병목을 없애는 운영 콘솔 기준으로 구성했습니다.
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+        </section>
+
+        <section className="metric-grid">
+          {overviewMetrics.map((metric) => (
+            <article className="metric-card" key={metric.label}>
+              <div className="section-heading">
+                <p className="section-label">{metric.label}</p>
+                <StatusChip tone={metric.tone}>{metric.tone}</StatusChip>
+              </div>
+              <strong className="metric-value">{metric.value}</strong>
+              <p className="body-copy">{metric.detail}</p>
+            </article>
+          ))}
+        </section>
+
+        <section className="panel-card">
+          <div className="section-heading">
+            <div>
+              <p className="section-label">Operational timeline</p>
+              <h3>최근 이벤트</h3>
+            </div>
+            <button className="ghost-button" type="button">
+              Open audit trail
+            </button>
+          </div>
+
+          <div className="timeline">
+            {timeline.map((entry) => (
+              <div className="timeline-row" key={`${entry.time}-${entry.title}`}>
+                <span className="mono-time">{entry.time}</span>
+                <div className={`timeline-marker timeline-${entry.tone}`} />
+                <div className="timeline-body">
+                  <strong>{entry.title}</strong>
+                  <p>{entry.detail}</p>
+                </div>
+              </div>
+            ))}
+            {timeline.length === 0 ? (
+              <p className="body-copy">백엔드 응답이 없어 타임라인을 비워둔 상태입니다.</p>
+            ) : null}
+          </div>
+        </section>
+      </div>
+    </AppShell>
   );
 }
