@@ -1,5 +1,5 @@
 import { AppShell } from "@/components/app-shell";
-import { getApprovals } from "@/components/api";
+import { formatScheduledAt, getApprovals } from "@/components/api";
 import { StatusChip } from "@/components/status-chip";
 
 export const dynamic = "force-dynamic";
@@ -35,7 +35,7 @@ export default async function ApprovalsPage() {
             </div>
             <p className="body-copy">{item.channels.join(", ")} 채널로 배포될 승인 요청입니다.</p>
             <div className="meta-row">
-              <span>예약 시각 {item.scheduled_at}</span>
+              <span>예약 시각 {formatScheduledAt(item.scheduled_at)}</span>
               <span>요청자 {item.requested_by}</span>
             </div>
             <div className="button-row">

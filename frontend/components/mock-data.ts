@@ -1,3 +1,5 @@
+import { formatScheduledAt } from "@/components/api";
+
 export const overviewMetrics = [
   { label: "오늘 예정 게시", value: "24", detail: "3건은 30분 내 실행", tone: "info" as const },
   { label: "승인 대기", value: "7", detail: "고우선순위 2건 포함", tone: "warning" as const },
@@ -68,7 +70,12 @@ export function buildTimelineFromApi(
   }>,
 ) {
   const approvalRows = approvalsFromApi.slice(0, 2).map((item) => ({
-    time: item.scheduled_at.slice(11, 16),
+    time: formatScheduledAt(item.scheduled_at, {
+      hour: "2-digit",
+      minute: "2-digit",
+      month: undefined,
+      day: undefined,
+    }),
     title: `${item.brand_name} 승인 대기`,
     detail: item.title,
     tone: item.risk_level === "warning" ? ("warning" as const) : ("info" as const),

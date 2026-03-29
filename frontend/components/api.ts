@@ -33,6 +33,7 @@ export type FailureItem = {
 
 const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:18000";
+const KOREA_TIME_ZONE = "Asia/Seoul";
 
 async function apiGet<T>(path: string): Promise<T | null> {
   try {
@@ -76,6 +77,27 @@ export async function getApprovals(): Promise<ApprovalItem[]> {
 export async function getFailures(): Promise<FailureItem[]> {
   const data = await apiGet<FailureItem[]>("/api/v1/failures");
   return data ?? [];
+}
+
+export function formatScheduledAt(
+  scheduledAt: string,
+  options?: Intl.DateTimeFormatOptions,
+) {
+  const date = new Date(scheduledAt);
+
+  if (Number.isNaN(date.getTime())) {
+    return scheduledAt;
+  }
+
+  return new Intl.DateTimeFormat("ko-KR", {
+    timeZone: KOREA_TIME_ZONE,
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+    ...options,
+  }).format(date);
 }
 
 export function getApiBaseUrl() {
