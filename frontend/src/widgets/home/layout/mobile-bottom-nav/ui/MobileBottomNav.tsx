@@ -2,16 +2,20 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, LayoutDashboard, LogIn, UserPlus } from "lucide-react";
+import { Boxes, CircleHelp, Home, LayoutDashboard } from "lucide-react";
 
 const mobileNavItems = [
   { href: "/", label: "홈", icon: Home },
+  { href: "#features", label: "기능", icon: Boxes },
+  { href: "#faq", label: "FAQ", icon: CircleHelp },
   { href: "/dashboard", label: "대시", icon: LayoutDashboard },
-  { href: "/login", label: "로그인", icon: LogIn },
-  { href: "/signup", label: "가입", icon: UserPlus },
 ];
 
 const isActivePath = (pathname: string, href: string) => {
+  if (href.startsWith("#")) {
+    return pathname === "/";
+  }
+
   if (href === "/") {
     return pathname === "/";
   }
@@ -24,7 +28,7 @@ export default function MobileBottomNav() {
 
   return (
     <nav
-      className="fixed inset-x-0 bottom-0 z-50 border-t border-slate-200 bg-white/95 backdrop-blur-sm md:hidden"
+      className="fixed inset-x-0 bottom-0 z-50 border-t border-[var(--line)] bg-[rgba(255,247,248,0.94)] backdrop-blur-sm md:hidden"
       style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
       aria-label="모바일 하단 메뉴"
     >
@@ -37,8 +41,8 @@ export default function MobileBottomNav() {
             <li key={item.href} className="h-full">
               <Link
                 href={item.href}
-                className={`flex h-full w-full flex-col items-center justify-center gap-0.5 text-[11px] font-medium transition ${
-                  isActive ? "text-[var(--primary)]" : "text-slate-500 hover:text-slate-900"
+                className={`flex h-full w-full cursor-pointer flex-col items-center justify-center gap-0.5 text-[11px] font-medium transition ${
+                  isActive ? "text-[var(--accent-strong)]" : "text-slate-500 hover:text-slate-900"
                 }`}
                 aria-current={isActive ? "page" : undefined}
               >

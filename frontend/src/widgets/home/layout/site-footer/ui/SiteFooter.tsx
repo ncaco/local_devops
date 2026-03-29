@@ -26,11 +26,14 @@ export default function SiteFooter() {
   };
 
   return (
-    <footer className="mb-[60px] border-t border-slate-200 bg-white text-slate-900 md:mb-0">
+    <footer className="mb-[60px] border-t border-[var(--line)] bg-[linear-gradient(180deg,rgba(255,255,255,0.84)_0%,rgba(255,241,242,0.96)_100%)] text-slate-900 md:mb-0">
       <Container>
         <div className="grid gap-10 py-16 lg:grid-cols-[1.2fr_2.8fr]">
           <div className="space-y-6">
             <Image src="/images/site-logo.svg" alt="SNSAUTO 로고" width={240} height={64} className="h-8 w-auto" />
+            <p className="max-w-sm text-sm leading-7 text-slate-600">
+              회원 기능 중심 베이스를 운영 자동화 제품의 실제 진입면으로 재구성한 랜딩입니다.
+            </p>
             <div className="flex gap-3 text-slate-500">
               {footerContent.socials.map((social) => {
                 const Icon = iconMap[social.label] ?? Globe;
@@ -39,7 +42,7 @@ export default function SiteFooter() {
                     key={social.href}
                     href={social.href}
                     aria-label={social.label}
-                    className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 transition hover:border-slate-400 hover:text-slate-900"
+                    className="inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-[var(--line)] transition hover:border-[var(--accent)] hover:text-slate-900"
                   >
                     <Icon className="h-4 w-4" />
                   </Link>
@@ -57,14 +60,14 @@ export default function SiteFooter() {
                   {item.children?.length ? (
                     item.children.map((child) => (
                       <li key={child.label}>
-                        <Link href={child.href} className="hover:text-slate-900">
+                        <Link href={child.href} className="cursor-pointer hover:text-slate-900">
                           {child.label}
                         </Link>
                       </li>
                     ))
                   ) : (
                     <li>
-                      <Link href={item.href} className="hover:text-slate-900">
+                      <Link href={item.href} className="cursor-pointer hover:text-slate-900">
                         {item.label}
                       </Link>
                     </li>
@@ -74,7 +77,7 @@ export default function SiteFooter() {
             ))}
           </div>
         </div>
-        <div className="flex flex-col items-start justify-between gap-4 border-t border-slate-200 py-6 text-xs text-slate-500 md:flex-row">
+        <div className="flex flex-col items-start justify-between gap-4 border-t border-[var(--line)] py-6 text-xs text-slate-500 md:flex-row">
           <p>{footerContent.copyright}</p>
           <div className="flex items-center gap-2 text-xs text-slate-500">
             <Globe className="h-4 w-4" />
